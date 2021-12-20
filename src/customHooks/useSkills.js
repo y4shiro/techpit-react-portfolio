@@ -41,9 +41,11 @@ export const useSkills = () => {
     });
   };
 
+  const DEFAULT_MAX_PERCENTAGE = 100;
+  const LANGUAGE_COUNT_BASE = 10;
   const converseCountToPercentage = (languageCount) => {
-    if (languageCount > 10) return 100;
-    return languageCount * 10;
+    if (languageCount > LANGUAGE_COUNT_BASE) return DEFAULT_MAX_PERCENTAGE;
+    return languageCount * LANGUAGE_COUNT_BASE;
   };
 
   const sortedLanguageList = () =>
