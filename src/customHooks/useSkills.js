@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import axios from 'axios';
+import { requestStates } from '../constants';
 
 import {
   skillReducer,
@@ -10,8 +11,7 @@ import {
 export const useSkills = () => {
   const [state, dispatch] = useReducer(skillReducer, initialState);
 
-  useEffect(() => {
-    dispatch({ type: actionTypes.fetch });
+  const fetchReposApi = () => {
     axios
       .get('https://api.github.com/users/y4shiro/repos')
       .then((response) => {
@@ -25,6 +25,15 @@ export const useSkills = () => {
       .catch(() => {
         dispatch({ type: actionTypes.error });
       });
+  };
+
+  useEffect(() => {
+    if (state.requestState !== requestStates.loading) return;
+    fetchReposApi();
+  }, [state.requestState]);
+
+  useEffect(() => {
+    dispatch({ type: actionTypes.fetch });
   }, []);
 
   const generateLanguageCountObj = (allLanguageList) => {
