@@ -120,6 +120,10 @@ h3 {
   text-align: center;
 }
 
+.skill-item {
+  margin: 0 48px;
+}
+
 /* Contact */
 #contact {
   padding: 128px 0;
